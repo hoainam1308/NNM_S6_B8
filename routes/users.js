@@ -14,7 +14,7 @@ router.get('/',check_authentication,check_authorization(constants.MOD_PERMISSION
   let users = await userController.GetAllUser();
   CreateSuccessResponse(res, 200, users)
 });
-router.post('/', CreateUserValidator, validate, async function (req, res, next) {
+router.post('/', check_authentication, check_authorization(constants.ADMIN_PERMISSION), CreateUserValidator, validate, async function (req, res, next) {
   try {
     let body = req.body;
     let newUser = await userController.CreateAnUser(body.username, body.password, body.email, body.role);
@@ -23,7 +23,7 @@ router.post('/', CreateUserValidator, validate, async function (req, res, next) 
     CreateErrorResponse(res, 404, error.message)
   }
 });
-router.put('/:id', UpdateUserValidator, validate, async function (req, res, next) {
+router.put('/:id', check_authentication, check_authorization(constants.ADMIN_PERMISSION), UpdateUserValidator, validate, async function (req, res, next) {
   try {
     let body = req.body;
     let updatedResult = await userController.UpdateAnUser(req.params.id, body);

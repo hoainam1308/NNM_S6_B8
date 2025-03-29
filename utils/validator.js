@@ -81,7 +81,7 @@ module.exports = {
     UpdateUserValidator: [
         body("username").isLength(options.username).withMessage(util.format(constants.VALIDATOR_ERROR_USERNAME,options.username.minLength)),
         body("email").isEmail().withMessage(constants.VALIDATOR_ERROR_EMAIL),
-        body("role").isMongoId().withMessage("role khong hop le")
+        body("role").isMongoId().withMessage("role khong hop le"),
         body("fullname").optional().isString().withMessage("fullname phai la chuoi"),
         body("avatarUrl").optional().isString().withMessage("avatarUrl phai la chuoi"),
         body("status").optional().isBoolean().withMessage("status phai la boolean")
